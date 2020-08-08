@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+
+#find process by listen port on mac and print the proces name ,etc. 
+# finds the process that is running on a specific port
+function findpidbyport() {
+  data=$(netstat -anv | grep LISTEN | grep ${1} | tr -s ' '| rev| cut -d" " -f4 |rev | cut -f1)
+  #echo $data
+  pid=$(echo $data | cut -d" " -f1)
+  echo   "ps -p ${pid} -o pid,command,login,%cpu,%mem"
+  #cho $pid
+  ps -p ${pid} -o pid,command,login,%cpu,%mem
+}
+
